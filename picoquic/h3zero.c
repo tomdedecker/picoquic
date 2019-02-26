@@ -36,6 +36,8 @@
 #include "picoquic_internal.h"
 #include "h3zero.h"
 
+#include "qlog.h"
+
 /*
  * Transport parameters.
  * HTTP/3 does not use server-initiated bidirectional streams;

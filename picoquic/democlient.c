@@ -26,6 +26,8 @@
 #include "h3zero.h"
 #include "democlient.h"
 
+#include "qlog.h"
+
 /*
  * Code common to H3 and H09 clients
  */
@@ -219,6 +221,15 @@ static int picoquic_demo_client_open_stream(picoquic_cnx_t* cnx,
             fprintf(stdout, "Cannot send GET command for stream(%d): %s\n", (int)stream_id, path);
         }
         else {
+            char qlog_event[QLOG_MAX_EVENT_SIZE];
+            // Create a formatted event
+            sprintf(qlog_event, "\"HTTP\",\"STREAM_OPEN\",\"GET\", {\"id\": %lu,\"path\": \"%s\"}", stream_id, path);
+            
+            // Make sure the string ends
+            qlog_event[QLOG_MAX_EVENT_SIZE-1] = '\0';
+            
+            qlog_add_event(qlog_event);
+            
             fprintf(stdout, "Opening stream %d to GET %s\n", (int)stream_id, path);
         }
     }
@@ -307,6 +318,9 @@ int picoquic_demo_client_callback(picoquic_cnx_t* cnx,
             }
 
             if (fin_or_event == picoquic_callback_stream_fin) {
+                char qlog_event[QLOG_MAX_EVENT_SIZE];
+                sprintf(qlog_event, "\"HTTP\", \"STREAM_CLOSE\", \"FIN\", {\"id\": %lu}", stream_ctx->stream_id);
+                qlog_add_event(qlog_event);
                 fclose(stream_ctx->F);
                 stream_ctx->F = NULL;
                 ctx->nb_open_streams--;

@@ -28,6 +28,7 @@
 #include <sys/time.h>
 #endif
 
+#include "qlog.h"
 
 /*
 * Structures used in the hash table of connections
@@ -1510,6 +1511,10 @@ picoquic_cnx_t* picoquic_create_cnx(picoquic_quic_t* quic,
 
         picoquic_open_cc_dump(cnx);
     }
+    
+    if (cnx != NULL) {
+        qlog_init(cnx);
+    }
 
     return cnx;
 }
@@ -2163,6 +2168,8 @@ void picoquic_delete_cnx(picoquic_cnx_t* cnx)
 
         free(cnx);
     }
+    
+    qlog_close();
 }
 
 int picoquic_is_handshake_error(uint16_t error_code)

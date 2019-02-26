@@ -29,6 +29,7 @@ set(PICOQUIC_LIBRARY_FILES
     picoquic/picosocks.c
     picoquic/picosplay.c
     picoquic/quicctx.c
+    picoquic/qlog.c
     picoquic/sacks.c
     picoquic/sender.c
     picoquic/spinbit.c

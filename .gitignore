@@ -20,3 +20,39 @@ Release
 */*.xbf
 */*.ilk
 *.b
+
+# Vscode
+.vscode/*
+
+# Ignore build folder
+build
+
+# Cmake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# Ignore files used for testing purposes
+file-123k.txt
+index.html
+main.jpg
+slash_en_slash_latest.html
+test.html
+war-and-peace.txt
+doc-1234567.html
+demo_ticket_store.bin
+demo_token_store.bin
+
+# Ignore picotls subdirectory
+picotls
+
+# Ignore logfiles
+*.json
