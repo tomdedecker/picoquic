@@ -319,7 +319,7 @@ int picoquic_demo_client_callback(picoquic_cnx_t* cnx,
 
             if (fin_or_event == picoquic_callback_stream_fin) {
                 char qlog_event[QLOG_MAX_EVENT_SIZE];
-                sprintf(qlog_event, "\"HTTP\", \"STREAM_CLOSE\", \"FIN\", {\"id\": %lu}", stream_ctx->stream_id);
+                sprintf(qlog_event, "\"HTTP\", \"STREAM_CLOSE\", \"FIN\", {\"id\": %lu, \"bytes received\": %lu}", stream_ctx->stream_id, stream_ctx->received_length);
                 qlog_add_event(qlog_event);
                 fclose(stream_ctx->F);
                 stream_ctx->F = NULL;
