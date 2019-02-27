@@ -223,7 +223,7 @@ static int picoquic_demo_client_open_stream(picoquic_cnx_t* cnx,
         else {
             char qlog_event[QLOG_MAX_EVENT_SIZE];
             // Create a formatted event
-            sprintf(qlog_event, "\"HTTP\",\"STREAM_OPEN\",\"GET\", {\"id\": %lu,\"path\": \"%s\"}", stream_id, path);
+            sprintf(qlog_event, "\"HTTP\",\"STREAM_OPEN\",\"GET\", {\"id\": %lu,\"path\": \"%s\",\"alpn:\": \"%u\"}", stream_id, path, ctx->alpn);
             
             // Make sure the string ends
             qlog_event[QLOG_MAX_EVENT_SIZE-1] = '\0';
