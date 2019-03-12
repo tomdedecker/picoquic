@@ -93,7 +93,7 @@ int qlog_close() {
     if (qlog->isEmpty == false) {
         fputs("\n", qlog->f_ptr);
     }
-    fputs("])", qlog->f_ptr);
+    fputs("]}", qlog->f_ptr);
     
     // Clean up memory
     fclose(qlog->f_ptr);
